@@ -31,5 +31,12 @@
       <input class="u-full-width" type="text">
       <a class='button button-primary u-full-width'>Search</a>
     </card>
+    <card class="search-card">
+      <h4>Price Ranking</h4>
+      <br>
+      <% @price_ranking.each do |event| %>
+        <p><%= event.ticket_price %>円: <%= event.title %></p>
+      <% end %>
+    </card>
   </sidebar>
 </div>
