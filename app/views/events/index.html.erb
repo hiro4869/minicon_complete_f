@@ -12,6 +12,15 @@
           <div class="six columns">
             <p class="ticket-price"><%= event.ticket_price %>円</p>
             <%= link_to 'Purchase', new_event_purchase_path(event), class: 'button button-primary' %>
+            <% if current_user.present?%>
+              <% if Favorite.exists?(user_id: current_user.id, event_id: event.id) %>
+                <%= link_to 'お気に入りから削除', favorite_path(event.id), method: :delete, class: 'button button-primary' %>
+              <% else %>
+                <%= link_to 'お気に入りに追加', favorites_path(event_id: event.id), method: :post, class: 'button button-primary' %>
+              <% end %>
+            <% else %>
+              <p>お気に入りに登録するにはログインして下さい。</p>
+            <% end %>
           </div>
         </div>
       </card>
@@ -30,6 +39,17 @@
       <h4>Search</h4>
       <input class="u-full-width" type="text">
       <a class='button button-primary u-full-width'>Search</a>
+    </card>
+    <card class="search-card">
+      <h4>Favorites</h4>
+      <br>
+      <% if @favorites.present? %>
+        <% @favorites.each do |favorite| %>
+          <p>●title: <%= favorite.event.title %></p>
+        <% end %>
+      <% else%>
+        <p>お気に入りイベントはありません。</p>
+      <% end %>
     </card>
   </sidebar>
 </div>

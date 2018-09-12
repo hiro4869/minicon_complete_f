@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   # root 'controller_name#action_name'
   root 'events#index'
   
+  resources :favorites
+
   resources :events, only: [:index] do
     resources :purchases, only: [:new, :create]
   end
