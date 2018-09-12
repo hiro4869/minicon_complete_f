@@ -1,0 +1,7 @@
+<h3>カテゴリー</h3>
+<% @events.each do |event| %>
+  <p>
+    ●event_id: <%= event.id %>,
+    ○event_title: <%= event.title %>
+  </p>
+<% end %>
